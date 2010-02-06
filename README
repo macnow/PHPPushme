@@ -1,0 +1,10 @@
+// PHPPushme Class
+// Patryk 'jamzed' Kuzmicz || 2010.01.24
+// patryk.kuzmicz@gmail.com
+
+Simple class to send messages via pushme.to service directly from command line.
+
+- examplecmd.php
+- example.php
+- pushmeClass.php
+
