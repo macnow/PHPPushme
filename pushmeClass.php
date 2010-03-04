@@ -8,6 +8,9 @@
 // Patryk 'jamzed' Kuzmicz || 2010.01.24
 // patryk.kuzmicz@gmail.com
 //
+// Maciej Nowakowski || 2010.03.04
+// macnow@gmail.com
+// Added "from" option
 ////////////////////////////////////////////////////////////
 
 // FORM in HTML to send messages.
@@ -24,18 +27,20 @@ Class Push {
 
 var $serverapi = 'http://pushme.to/';
 
-	public function sendMsg($recipient,$message,$signature) {
+	public function sendMsg($recipient,$message,$signature,$from=null) {
 
 		// urlencode data
 		$recipient = utf8_encode($recipient);
 		$message = utf8_encode($message);
 		$signature = utf8_encode($signature);
+		$from = 'http://'.utf8_encode($from);
 
 		$posturl = "$this->serverapi$recipient/";
 		$ch = curl_init($posturl);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, "_encoding=UTF-8&message=$message&signature=$signature");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+		curl_setopt($ch, CURLOPT_REFERER, $from);
 		$bodyresult = curl_exec($ch); 
 
 		if ( curl_errno($ch) ) {
